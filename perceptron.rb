@@ -94,6 +94,7 @@ class Perceptron
             puts "Recalculando o valor dos pesos..."
             puts
             sleep(@@speed)
+            break
             # @@registros_validados.clear
           end
         # end
