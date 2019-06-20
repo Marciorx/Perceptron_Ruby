@@ -6,11 +6,6 @@ class Perceptron
   @w3 = rand(0.0..1.0)
   @@aprendizagem = 0.2
   @@treinamento_perceptron_finalizado = false
-  # @@registros_validados = []
-  # x1 = 0.0
-  # x2 = 0.0
-  # vies = 1
-  # saida = 0
   @@speed = 0.5
   @@pesos = [@w1, @w2, @w3]
 
@@ -45,10 +40,8 @@ class Perceptron
     saida == esperado
   end
 
-  #   calculo_peso(@@pesos, @@aprendizagem, esperado, saida, dado)
+
   def calculo_peso(peso, aprend, esperado, saida, entrada)
-    # resultado = 0
-    # aprend_entrada = 0
     resultado = (esperado - saida) * aprend
     aprend_entrada = entrada.each.map {|x| x * resultado}
     @@pesos = [peso,aprend_entrada].transpose.map(&:sum)
@@ -69,14 +62,7 @@ class Perceptron
 
   def treinamento_perceptron(dados)
     error_count = 0
-    # dados.each do |i|
-    #   @@registros_validados.append(true)
-    # end
-    
-    # while @@registros_validados.length > 0 do
       dados.each do |dado|
-        # registro_classificado = false
-        # until registro_classificado == true
           saida = ativacao(dado[0], '%.2f' % @@pesos[0], dado[1], '%.2f' % @@pesos[1], '%.2f' % @@pesos[2])
           esperado = dado.last
 
@@ -84,8 +70,6 @@ class Perceptron
             puts "O registro #{dado} foi classificado corretamente"
             puts
             sleep(@@speed)
-            # @@registros_validados.pop
-            # registro_classificado = true
           else
             error_count += 1
             @@pesos = calculo_peso(@@pesos, @@aprendizagem, esperado, saida, dado)
@@ -95,9 +79,7 @@ class Perceptron
             puts
             sleep(@@speed)
             break
-            # @@registros_validados.clear
           end
-        # end
       end
         puts        
         puts
@@ -105,7 +87,7 @@ class Perceptron
         puts 
         puts "--------------------------------------------------------------------------------------------------------------------------"
         puts 
-    # end
+
   if error_count == 0  
     return @@treinamento_perceptron_finalizado = true
   end
@@ -113,11 +95,9 @@ class Perceptron
 
   def prediction(a,b)
     saida = ativacao(a, @@pesos[0], b, @@pesos[1], @@pesos[2])
-    # puts "Para a entrada [#{a.to_s}, #{b.to_s}] o valor de saída é: #{saida.to_s}."
   end
 end
 
-#DataSet.all.each_with_index {|d, index| dados_entrada[index] = [d.x1, d.x2, d.Saida]}
 dados_entrada = [  [1, 1, 1], [9.4, 6.4, -1], [2.5, 2.1, 1], [8, 7.7, -1], [0.5, 2.2, 1], [7.9, 8.4, -1], [7, 7, -1], [2.8, 0.8, 1], [1.2, 3, 1], [7.8, 6.1, -1] ]
 
 perceptron = Perceptron.new
@@ -135,6 +115,3 @@ b = gets.chomp.to_f
 puts
 
 perceptron.prediction(a, b)
-
-# saida = ativacao(dados[index][0], @@pesos[0], dados[index][1],@@pesos[1], @@pesos[2])
-# resultado_obtido = ativacao(dados_entrada[i][0], @w1, dados_entrada[i][1], @w2, vies, @w3)
